@@ -1,29 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct producto{
+struct producto {
     int codigo;
     char descripcion[50];
     float precio;
 };
 
-  int main()
-{
+int main() {
     struct producto *prod;
 
     prod = malloc(sizeof(struct producto));
 
-    printf("Introduce el codigo\n");
-    scanf("%d",&prod->codigo);
-    printf("Introduce el codigo\n");
-    scanf("&s",prod->descripcion);
-    printf("Introduce el precio\n");
+    if (prod == NULL) {
+        printf("Error al asignar memoria.\n");
+        return 1;
+    }
 
-    printf("Codigo del articulo: %d",prod->codigo);
-    printf("Descripcion: %\n", prod->descripcion);
-    printf("Precio: %f\n", prod->precio);
+    printf("Introduce el codigo: ");
+    scanf("%d", &(prod->codigo));
+    printf("Introduce la descripcion: ");
+    scanf(" %49[^\n]", prod->descripcion); 
+    printf("Introduce el precio: ");
+    scanf("%f", &(prod->precio));
+
+    printf("Codigo del articulo: %d\n", prod->codigo);
+    printf("Descripcion: %s\n", prod->descripcion);
+    printf("Precio: %.2f\n", prod->precio);
 
     free(prod);
     prod = NULL;
 
+    return 0;
 }
